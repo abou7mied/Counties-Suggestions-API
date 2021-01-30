@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  web-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    env_file: .env
+    command: node build/server.js
+    ports:
+      - 3000:3000
