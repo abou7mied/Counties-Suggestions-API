@@ -28,12 +28,12 @@ export default class StaticCountyDAL implements ICountySuggestionDAL {
     const results = []
     for (const county of counties) {
       if (results.length < limit) {
-        let matched = false
+        let matched = true
         if (filters.name !== undefined) {
-          matched = !!(county.name.match(new RegExp(filters.name, 'i')))
+          matched &&= !!(county.name.match(new RegExp(filters.name, 'i')))
         }
         if (filters.state !== undefined) {
-          matched = !!(county.state.match(new RegExp(filters.state, 'i')))
+          matched &&= !!(county.state.match(new RegExp(filters.state, 'i')))
         }
         if (matched) {
           results.push(county)
