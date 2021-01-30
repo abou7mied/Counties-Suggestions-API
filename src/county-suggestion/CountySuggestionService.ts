@@ -10,6 +10,18 @@ export default class CountySuggestionService implements ICountySuggestionService
 
   async getSuggestions (query: string): Promise<any> {
     const [name, state] = query.split(',').map(item => item.trim())
+
+    if (!name && !state) {
+      return []
+    }
+
+    if (query.length === 2) {
+      const suggestions = await this.countySuggestionDAL.findMatches({ state })
+      if (suggestions.length) {
+        return suggestions
+      }
+    }
+
     return await this.countySuggestionDAL.findMatches({ name, state })
   }
 }

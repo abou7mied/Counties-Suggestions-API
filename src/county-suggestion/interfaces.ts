@@ -19,6 +19,7 @@ export interface IFindMatchesOptions {
 }
 
 export interface ICountySuggestionDAL {
+  findByState: (state: string, options?: IFindMatchesOptions) => Promise<ICountySuggestion[]>
   findMatches: (filters: Partial<ICountySuggestion>, options?: IFindMatchesOptions) => Promise<ICountySuggestion[]>
 }
 

@@ -15,16 +15,11 @@ export default class StaticCountyDAL implements ICountySuggestionDAL {
     }
   }
 
-  async findMatches (filters: Partial<ICountySuggestion>, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
-    if (!filters.name && !filters.state) {
-      return []
-    }
-    if (!filters.state && filters.name && filters.name.length === 2) {
-      if (this.statesMap[filters.name.toUpperCase()]) {
-        return this.statesMap[filters.name.toUpperCase()].slice(0, limit)
-      }
-    }
+  async findByState (state: string, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
+    return this.statesMap[state.toUpperCase()].slice(0, limit)
+  }
 
+  async findMatches (filters: Partial<ICountySuggestion>, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
     const results = []
     for (const county of counties) {
       if (results.length < limit) {

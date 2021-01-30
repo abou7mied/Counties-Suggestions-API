@@ -4,19 +4,13 @@ import CountyModel from './CountyModel'
 
 @injectable()
 export default class MongoCountyDAL implements ICountySuggestionDAL {
-  async findMatches (filters: Partial<ICountySuggestion>, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
-    if (!filters.name && !filters.state) {
-      return []
-    }
-    if (!filters.state && filters.name && filters.name.length === 2) {
-      const counties = await CountyModel.find({
-        state: filters.name.toUpperCase()
-      }).limit(limit)
-      if (counties.length) {
-        return counties
-      }
-    }
+  async findByState (state: string, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
+    return await CountyModel.find({
+      state: state.toUpperCase()
+    }).limit(limit)
+  }
 
+  async findMatches (filters: Partial<ICountySuggestion>, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
     const query: any = {}
     if (filters.name) {
       query.name = {
