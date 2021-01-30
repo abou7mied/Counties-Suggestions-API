@@ -33,10 +33,9 @@ npm test
 - Inversify (dependency injection)
 - Jest (Testing Framework)
 - Mongoose (ORM)
-- swagger (API documentation)
 
 ## Architecture
-- The project structured by components instead of technical roles
+- To follow the best practises for scalable Node.js apps, I structured this project by components instead of technical roles
 - There are DALs (data access layers) for all models, so it's pretty easy to swap between database drivers (Mongo/MySql/Static-files) without the need to do any refactoring to the data consumers   
   
 
