@@ -8,5 +8,25 @@ services:
     restart: on-failure
     env_file: .env
     command: node build/server.js
+    environment:
+      MONGO_URL: mongodb://mongo/counties
     ports:
       - 3000:3000
+
+  mongo:
+    image: 'mongo'
+    container_name: mongo
+
+  mongo-seed:
+    image: stefanwalther/mongo-seed
+    container_name: mongo-seed
+    environment:
+      - MONGODB_HOST=mongo
+      - MONGODB_PORT=27017
+    volumes:
+      - ./src/county-suggestion/data:/data
+    depends_on:
+      - mongo
+    command: [
+      "mongoimport --uri mongodb://mongo/counties --mode upsert --type json --file /data/counties.json --jsonArray"
+    ]

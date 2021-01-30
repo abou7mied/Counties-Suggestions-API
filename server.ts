@@ -9,6 +9,7 @@ const database = container.get<IDatabase>(TYPES.Database)
 const app = appFactory(container);
 
 (async () => {
+  console.log('countiesDatabaseDriver', config.countiesDatabaseDriver)
   await database.connect()
   app.listen(config.httpPort, () => {
     console.log(`Listening on ${config.httpPort}`)
