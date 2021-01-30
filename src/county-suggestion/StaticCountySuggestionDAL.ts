@@ -1,29 +1,39 @@
 import { injectable } from 'inversify'
-import { ICountySuggestion, ICountySuggestionDAL } from './interfaces'
+import { ICountySuggestion, ICountySuggestionDAL, IFindMatchesOptions } from './interfaces'
 import counties from './data/counties.json'
 
 @injectable()
 export default class StaticCountySuggestionDAL implements ICountySuggestionDAL {
-  async findMatches (filters: Partial<ICountySuggestion>): Promise<ICountySuggestion[]> {
+  private readonly statesMap: { [state: string]: ICountySuggestion[] } = {}
+
+  constructor () {
+    for (const county of counties) {
+      if (!this.statesMap[county.state]) {
+        this.statesMap[county.state] = []
+      }
+      this.statesMap[county.state].push(county)
+    }
+  }
+
+  async findMatches (filters: Partial<ICountySuggestion>, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
     if (!filters.name && !filters.state) {
       return []
     }
+    if (!filters.state && filters.name && filters.name.length === 2) {
+      if (this.statesMap[filters.name.toUpperCase()]) {
+        return this.statesMap[filters.name.toUpperCase()].slice(0, limit)
+      }
+    }
+
     const results = []
     for (const county of counties) {
-      if (results.length < 5) {
+      if (results.length < limit) {
         let matched = false
         if (filters.name !== undefined) {
-          if (filters.name.length === 2 && filters.state === undefined) {
-            matched = county.state.toLowerCase() === filters.name
-          } else {
-            matched = county.name.toLowerCase().match(filters.name) !== null
-            if (filters.state === undefined) {
-              matched ||= county.state.toLowerCase().match(filters.name) !== null
-            }
-          }
+          matched = !!(county.name.toLowerCase().match(filters.name))
         }
         if (filters.state !== undefined) {
-          matched &&= county.state.toLowerCase().match(filters.state) !== null
+          matched &&= !!(county.state.toLowerCase().match(filters.state))
         }
         if (matched) {
           results.push(county)
