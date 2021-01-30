@@ -36,8 +36,8 @@ npm test
 
 ## Architecture
 - To follow the best practises for scalable Node.js apps, I structured this project by components instead of technical roles
-- There are DALs (data access layers) for the models, so it's pretty easy to swap between database drivers (Mongo/MySql/Static-files) without the need to do any refactoring to the data consumers   
-  
+- Thanks to SOLID principles and clean architecture, in this project I use dependency injection to easily swap between the dependencies, for example, there are DALs (data access layers) for the models, so it's pretty easy to swap between database drivers (Mongo/MySql/Static-files) without the need to do any refactoring to the data consumers   
+- There are database drivers for the counties, static (Static file) and Mongo, you can swap between them by setting the env var `COUNTIES_DATABASE_DRIVER` to `static` (default) or `mongo`   
 
 
 
