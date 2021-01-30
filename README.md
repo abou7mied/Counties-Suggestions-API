@@ -27,6 +27,7 @@ npm test
 ```
 
 ## Built using
+- Typescript
 - Express.js (HTTP framework)
 - Docker / docker-compose
 - Inversify (dependency injection)
