@@ -1,6 +1,8 @@
 export const TYPES = {
+  Config: Symbol.for('Config'),
+  Database: Symbol.for('Database'),
   RequestHandlerFactory: Symbol.for('RequestHandlerFactory'),
   CountySuggestionController: Symbol.for('CountySuggestionController'),
   CountySuggestionService: Symbol.for('CountySuggestionService'),
-  MongoCountySuggestionDAL: Symbol.for('MongoCountySuggestionDAL')
+  CountyDAL: Symbol.for('CountyDAL')
 }

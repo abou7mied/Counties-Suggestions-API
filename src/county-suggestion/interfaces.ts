@@ -1,3 +1,5 @@
+import { Document } from 'mongoose'
+
 export interface ICountySuggestion {
   fips: string
   state: string
@@ -9,7 +11,7 @@ export interface ICountySuggestionController {
 }
 
 export interface ICountySuggestionService {
-  getSuggestions: (query: string) => Promise<any>
+  getSuggestions: (query: string) => Promise<ICountySuggestion[]>
 }
 
 export interface IFindMatchesOptions {
@@ -18,4 +20,9 @@ export interface IFindMatchesOptions {
 
 export interface ICountySuggestionDAL {
   findMatches: (filters: Partial<ICountySuggestion>, options?: IFindMatchesOptions) => Promise<ICountySuggestion[]>
+}
+
+export namespace DatabaseModels {
+  export interface CountySuggestion extends ICountySuggestion, Document {
+  }
 }

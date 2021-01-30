@@ -8,6 +8,7 @@ export default class CountySuggestionController implements ICountySuggestionCont
   }
 
   async getSuggestions (query: string): Promise<any> {
-    return await this.countySuggestionService.getSuggestions(query.toLowerCase())
+    const suggestions = await this.countySuggestionService.getSuggestions(query.toLowerCase())
+    return suggestions.map(({ name, state, fips }) => ({ name, state, fips }))
   }
 }

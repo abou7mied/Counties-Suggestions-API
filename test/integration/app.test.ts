@@ -1,9 +1,20 @@
 import request from 'supertest'
 import appFactory from '../../src/app/App'
 import container from '../../container'
+import { IDatabase } from '../../src/interfaces/IDatabase'
+import { TYPES } from '../../src/interfaces/types'
 
+const database = container.get<IDatabase>(TYPES.Database)
 const app = appFactory(container)
   .listen(0)
+
+beforeAll(async () => {
+  await database.connect()
+})
+
+afterAll(async () => {
+  await database.close()
+})
 
 describe('App API', () => {
   describe('Find counties by name/state', () => {

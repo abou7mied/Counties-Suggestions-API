@@ -4,7 +4,7 @@ import { TYPES } from '../interfaces/types'
 
 @injectable()
 export default class CountySuggestionService implements ICountySuggestionService {
-  constructor (@inject(TYPES.MongoCountySuggestionDAL) private readonly countySuggestionDAL: ICountySuggestionDAL) {
+  constructor (@inject(TYPES.CountyDAL) private readonly countySuggestionDAL: ICountySuggestionDAL) {
 
   }
 

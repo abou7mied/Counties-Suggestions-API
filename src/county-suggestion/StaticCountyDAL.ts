@@ -3,7 +3,7 @@ import { ICountySuggestion, ICountySuggestionDAL, IFindMatchesOptions } from './
 import counties from './data/counties.json'
 
 @injectable()
-export default class StaticCountySuggestionDAL implements ICountySuggestionDAL {
+export default class StaticCountyDAL implements ICountySuggestionDAL {
   private readonly statesMap: { [state: string]: ICountySuggestion[] } = {}
 
   constructor () {
@@ -30,10 +30,10 @@ export default class StaticCountySuggestionDAL implements ICountySuggestionDAL {
       if (results.length < limit) {
         let matched = false
         if (filters.name !== undefined) {
-          matched = !!(county.name.toLowerCase().match(filters.name))
+          matched = !!(county.name.match(new RegExp(filters.name, 'i')))
         }
         if (filters.state !== undefined) {
-          matched &&= !!(county.state.toLowerCase().match(filters.state))
+          matched = !!(county.state.match(new RegExp(filters.state, 'i')))
         }
         if (matched) {
           results.push(county)
