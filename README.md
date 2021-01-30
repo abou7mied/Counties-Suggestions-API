@@ -34,6 +34,13 @@ npm test
 - Inversify (dependency injection)
 - Jest (Testing Framework)
 - Mongoose (ORM)
+- OpenApi (API documentation)
+
+## API
+Check swagger documentation http://localhost:3000/api-docs
+
+
+
 
 ## Architecture
 - To follow the best [practises for scalable Node.js](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md) apps, I structured this project by components instead of technical roles
