@@ -1,8 +1,6 @@
-import { ICountySuggestion, ICountySuggestionDAL } from './interfaces'
 import { injectable } from 'inversify'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const counties = require('./data/counties.json')
+import { ICountySuggestion, ICountySuggestionDAL } from './interfaces'
+import counties from './data/counties.json'
 
 @injectable()
 export default class StaticCountySuggestionDAL implements ICountySuggestionDAL {
