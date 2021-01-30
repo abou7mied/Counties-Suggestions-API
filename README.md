@@ -17,6 +17,7 @@ COUNTIES_DATABASE_DRIVER=static # static / mongo
 
 Start the server
 ```
+touch .env
 docker-compose up -d
 ```
 
