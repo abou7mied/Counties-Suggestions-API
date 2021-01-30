@@ -5,7 +5,7 @@ import counties from './data/counties.json'
 @injectable()
 export default class StaticCountySuggestionDAL implements ICountySuggestionDAL {
   async findMatches (filters: Partial<ICountySuggestion>): Promise<ICountySuggestion[]> {
-    if (typeof filters.name === 'undefined' && filters.state === undefined) {
+    if (!filters.name && !filters.state) {
       return []
     }
     const results = []
