@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify'
-import { ICountySuggestionDAL, ICountySuggestionService } from './interfaces'
+import { ICountySuggestion, ICountySuggestionDAL, ICountySuggestionService } from './interfaces'
 import { TYPES } from '../interfaces/types'
 
 @injectable()
@@ -8,7 +8,7 @@ export default class CountySuggestionService implements ICountySuggestionService
 
   }
 
-  async getSuggestions (query: string): Promise<any> {
+  async getSuggestions (query: string): Promise<ICountySuggestion[]> {
     const [name, state] = query.split(',').map(item => item.trim())
 
     if (!name && !state) {

@@ -1,4 +1,5 @@
 import { injectable } from 'inversify'
+import { FilterQuery } from 'mongoose'
 import { ICountySuggestion, ICountySuggestionDAL, IFindMatchesOptions } from './interfaces'
 import CountyModel from './CountyModel'
 
@@ -11,7 +12,7 @@ export default class MongoCountyDAL implements ICountySuggestionDAL {
   }
 
   async findMatches (filters: Partial<ICountySuggestion>, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
-    const query: any = {}
+    const query: FilterQuery<typeof CountyModel> = {}
     if (filters.name) {
       query.name = {
         $regex: new RegExp(filters.name, 'i')

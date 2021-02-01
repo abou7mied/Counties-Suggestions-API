@@ -7,7 +7,7 @@ export interface ICountySuggestion {
 }
 
 export interface ICountySuggestionController {
-  getSuggestions: (query: string) => Promise<any>
+  getSuggestions: (query: string) => Promise<ICountySuggestion[]>
 }
 
 export interface ICountySuggestionService {
