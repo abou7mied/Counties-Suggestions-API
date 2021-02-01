@@ -3,7 +3,7 @@ import { ICountySuggestion, ICountySuggestionDAL, IFindMatchesOptions } from './
 import counties from './data/counties.json'
 
 @injectable()
-export default class StaticCountyDAL implements ICountySuggestionDAL {
+export default class CountyStaticDAL implements ICountySuggestionDAL {
   private readonly statesMap: { [state: string]: ICountySuggestion[] } = {}
 
   constructor () {

@@ -4,7 +4,7 @@ import { ICountySuggestion, ICountySuggestionDAL, IFindMatchesOptions } from './
 import CountyModel from './CountyModel'
 
 @injectable()
-export default class MongoCountyDAL implements ICountySuggestionDAL {
+export default class CountyMongoDAL implements ICountySuggestionDAL {
   async findByState (state: string, { limit }: IFindMatchesOptions = { limit: 5 }): Promise<ICountySuggestion[]> {
     return await CountyModel.find({
       state: state.toUpperCase()

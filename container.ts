@@ -11,12 +11,12 @@ import {
 } from './src/county-suggestion/interfaces'
 import CountySuggestionController from './src/county-suggestion/CountySuggestionController'
 import CountySuggestionService from './src/county-suggestion/CountySuggestionService'
-import StaticCountyDAL from './src/county-suggestion/StaticCountyDAL'
+import CountyStaticDAL from './src/county-suggestion/CountyStaticDAL'
 import { IConfig } from './src/interfaces/IConfig'
 import { IDatabase } from './src/interfaces/IDatabase'
 import { MongoDatabase } from './src/core/MongoDatabase'
 import { StaticDatabase } from './src/core/StaticDatabase'
-import MongoCountyDAL from './src/county-suggestion/MongoCountyDAL'
+import CountyMongoDAL from './src/county-suggestion/CountyMongoDAL'
 
 export const container = new Container()
 
@@ -28,14 +28,14 @@ if (config.countiesDatabaseDriver === 'mongo') {
     .to(MongoDatabase)
     .inRequestScope()
   container.bind<ICountySuggestionDAL>(TYPES.CountyDAL)
-    .to(MongoCountyDAL)
+    .to(CountyMongoDAL)
     .inRequestScope()
 } else {
   container.bind<IDatabase>(TYPES.Database)
     .to(StaticDatabase)
     .inRequestScope()
   container.bind<ICountySuggestionDAL>(TYPES.CountyDAL)
-    .to(StaticCountyDAL)
+    .to(CountyStaticDAL)
     .inRequestScope()
 }
 
