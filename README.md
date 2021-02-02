@@ -3,11 +3,6 @@
 A sample backend project for US counties suggestions API. 
 
 ## How to run
-First install the dependencies
-```
-npm install
-```
-
 Available environment variables:
 ```dotenv
 HTTP_PORT=3000
@@ -22,6 +17,13 @@ docker-compose up -d
 
 
 Testing
+
+First install the dependencies
+```
+npm install
+```
+
+Then run the tests
 ```
 npm test
 ```
