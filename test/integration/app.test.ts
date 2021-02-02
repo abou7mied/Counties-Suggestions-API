@@ -75,5 +75,41 @@ describe('App API', () => {
             ])
         })
     })
+    it('should return correct results for "wa"', async () => {
+      expect.assertions(1)
+      return await request(app)
+        .get('/suggest?q=wa')
+        .expect(200)
+        .then(({ body }) => {
+          expect(body)
+            .toEqual([
+              {
+                fips: '53001',
+                state: 'WA',
+                name: 'Adams'
+              },
+              {
+                fips: '53003',
+                state: 'WA',
+                name: 'Asotin'
+              },
+              {
+                fips: '53005',
+                state: 'WA',
+                name: 'Benton'
+              },
+              {
+                fips: '53007',
+                state: 'WA',
+                name: 'Chelan'
+              },
+              {
+                fips: '53009',
+                state: 'WA',
+                name: 'Clallam'
+              }
+            ])
+        })
+    })
   })
 })

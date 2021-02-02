@@ -16,7 +16,7 @@ export default class CountySuggestionService implements ICountySuggestionService
     }
 
     if (query.length === 2) {
-      const suggestions = await this.countySuggestionDAL.findMatches({ state })
+      const suggestions = await this.countySuggestionDAL.findMatches({ state: query })
       if (suggestions.length) {
         return suggestions
       }
