@@ -17,7 +17,6 @@ COUNTIES_DATABASE_DRIVER=static # static / mongo
 
 Start the server
 ```
-touch .env
 docker-compose up -d
 ```
 
@@ -38,6 +37,7 @@ npm test
 
 ## API
 Check swagger documentation http://localhost:3000/api-docs
+
 
 
 
